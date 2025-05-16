@@ -1,0 +1,4 @@
+venv/
+faiss_index_store/
+uploaded_pdfs/
+docs/

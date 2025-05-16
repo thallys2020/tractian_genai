@@ -1,0 +1,10 @@
+faiss-cpu
+fastapi
+uvicorn
+pypdf 
+langchain_community
+langchain 
+langchain-groq 
+sentence-transformers 
+python-multipart
+streamlit
