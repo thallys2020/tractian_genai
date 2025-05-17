@@ -20,8 +20,8 @@ docker build . -t genai-trac
 
 ```shell
 docker run -p 8000:8000 -p 8501:8501 \
-       --name genai-trac \
-       genai-trac-app
+       --name genai-trac-app \
+       genai-trac
 ```
 
 
@@ -66,7 +66,7 @@ This endpoint is used to upload and process PDF documents. The content of these 
 
 ```bash
 curl -X POST \
-  http://localhost:8000/upload \
+  http://localhost:8000/documents \
   -H 'Content-Type: multipart/form-data' \
   -F 'files=@/path/to/your/document1.pdf' \
   -F 'files=@/path/to/your/document2.pdf'
@@ -138,7 +138,7 @@ Body:
 
 - answer (string): The answer to the question, derived from the indexed documents. If the information is not found or an error occurs, the message should indicate this.
 
-#### 3. Index re-setting
+#### 3. Index resetting
 
 This endpoint is used to reset the local vector index.
 
