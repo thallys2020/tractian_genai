@@ -106,7 +106,7 @@ def reset_vector_store_on_api():
 st.title("📄 Sistema de Perguntas e Respostas sobre Documentos PDF")
 st.markdown("""
 Bem-vindo! Faça o upload de seus documentos PDF, aguarde o processamento e, em seguida, faça perguntas sobre o conteúdo deles.
-O sistema utiliza um Modelo de Linguagem Grande (LLM) para fornecer respostas contextuais.
+O sistema utiliza um LLM (API do Groq) para fornecer respostas contextuais.
 """)
 
 # Seção de Upload de Documentos

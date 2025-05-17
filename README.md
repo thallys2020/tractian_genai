@@ -1,21 +1,22 @@
 ## Tractian: RAG Workflow API with a Streamlit Front-end
 
-O projeto em questão se tratar da implementação de um sistema de pergunta e resposta utilizando a metodologia RAG.
-## 🚀 Começando
+The project in question deals with the implementation of a question and answer system using the RAG methodology.
 
-Essas instruções permitirão que você esteja hábil utilizar a ferramenta de forma correta. 
+## 🚀 Getting Started
+
+These instructions will enable you to use the tool correctly.
 
 ### 📋 Pré-requisitos
 
-1. Na raiz do projeto, crie o arquivo ```.env```, com variáveis semelhantes as presentes no arquivo ```.env.example```.
+1. In the project root, create the `.env` file, with variables similar to those present in the `.env.example` file.
 
-2. Faça o build da image utilizando o comando:
+2. Build the image using the command:
 
 ```shell
 docker build . -t genai-trac
 ```
 
-2. Execute o container com a imagem criada anteriormente, utilizando o comando:
+3. Run the container with the previously created image, using the command:
 
 ```shell
 docker run -p 8000:8000 -p 8501:8501 \
@@ -24,20 +25,20 @@ docker run -p 8000:8000 -p 8501:8501 \
 ```
 
 
-## 🔩 Interagindo com a Solução
+## 🔩 Interacting with the Solution
 
-Após inicializar a API você poderá acessá-la (documentação e chamadas), via o seguinte end-point:
+After initializing the API you will be able to access it (documentation and calls), via the following endpoint:
 
 ### Swagger API:
 
-Será disponibilizada a documentação da API no seguinte endpoint local:
+The API documentation will be available at the following local endpoint:
 ```
 http://localhost:8000/docs
 ```
 Contendo as rotas:
-- /documents: enviar documentos em PDF para armazenar em banco de dados indexado localmente (FAISS);
-- /question: enviar string referente à pergunta do usuário sobre os documentos enviados na rota ```/documents```;
-- /reset_index: reinicializar indexação de vector store;
+- /documents: send PDF documents to store in a locally indexed database (FAISS);
+- /question: send a string referring to the user's question about the documents sent on the `/documents` route;
+- /reset_index: reinitialize vector store indexing;
 
 
 ## API Contract
@@ -172,16 +173,16 @@ Body:
 
 ### Postman Collection:
 
-A collection do postman pode ser acessado no arquivo JSON `Tractian GenAI.postman_collection.json`, presenten na raiz do projeto.
+The Postman collection can be accessed in the JSON file `Tractian GenAI.postman_collection.json`, present in the project root.
 
 ### UI interface App:
 
-Caso o usuário queira acessar o Q&A AI assistant de uma maneira mais intuitiva, segere-se utilizar a interface gráfica steamlit pelo endereço: ```http://localhost:8501```.
+If the user wants to access the Q&A AI assistant in a more intuitive way, it is suggested to use the Streamlit graphical interface at the address: ```http://localhost:8501```.
 
-Neste caso, será mostrada a seguinte tela:
+In this case, the following screen will be shown:
 
 ![alt text](images/front_print.png)
 
-## 🤝 Agradecimentos
+## 🤝 Acknowledgements
 
-* Agradecemos por toda a atenção durante o projeto. Qualquer dúvida é só chamar. 📢
+* Thank you for all your attention during the project. If you have any questions, just ask. 📢
