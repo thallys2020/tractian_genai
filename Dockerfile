@@ -1,22 +1,37 @@
+# Use uma imagem base Python oficial.
+# Escolha uma versão que seja compatível com suas dependências.
 FROM python:3.12-slim
 
-# Define o diretório de trabalho
-WORKDIR /app
+# Copia os arquivos de requisitos primeiro para aproveitar o cache do Docker
+COPY requirements.txt ./requirements.txt
 
-# Copia os arquivos da aplicação
-#COPY . ./
+# Instala as dependências do backend
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia o restante dos diretórios e arquivos da aplicação
+
 COPY ./ ./
 
-# Atualiza o pip e instala as dependências Python
-RUN pip3 install -r requirements.txt
+# Garante que o script de inicialização seja executável
+RUN chmod +x ./entrypoint.sh
 
-# Exponha as portas necessárias
-EXPOSE 8501
+# Cria os diretórios que a API FastAPI pode precisar (se eles não existirem)
+# Estes diretórios serão usados para persistência se volumes forem montados.
+RUN mkdir -p /app/faiss_index_store && \
+    mkdir -p /app/uploaded_pdfs
+
+# Expõe as portas que os aplicativos usarão
+# Porta 8000 para a API FastAPI
 EXPOSE 8000
+# Porta 8501 para o aplicativo Streamlit
+EXPOSE 8501
 
-# Copia o script de entrada e define permissões de execução
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Define a variável de ambiente GROQ_API_KEY.
+# É ALTAMENTE RECOMENDADO passar esta variável em tempo de execução
+# em vez de embuti-la aqui por questões de segurança.
+# Exemplo: docker run -e GROQ_API_KEY="sua_chave_aqui" ...
+# ENV GROQ_API_KEY="SUA_CHAVE_GROQ_AQUI_SE_NECESSARIO_MAS_NAO_RECOMENDADO_EMBUTIR"
 
-# Define o comando de entrada
-ENTRYPOINT ["/entrypoint.sh"]
+# Comando para executar quando o contêiner iniciar
+# Executa o script start.sh que gerencia os dois processos
+CMD ["./entrypoint.sh"]

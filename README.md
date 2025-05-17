@@ -1,7 +1,6 @@
 ## Tractian: RAG Workflow API with a Streamlit Front-end
 
-O projeto em questão se tratar da implementação de um sistema de tratamento e correção de planilhas, utilizando GenAI com Amazon Bedrock juntamente ao Pandas Agent (LangChain).
-
+O projeto em questão se tratar da implementação de um sistema de pergunta e resposta utilizando a metodologia RAG.
 ## 🚀 Começando
 
 Essas instruções permitirão que você esteja hábil utilizar a ferramenta de forma correta. 
@@ -13,13 +12,15 @@ Essas instruções permitirão que você esteja hábil utilizar a ferramenta de 
 2. Faça o build da image utilizando o comando:
 
 ```shell
-docker build . -t tractian-rag
+docker build . -t genai-trac
 ```
 
 2. Execute o container com a imagem criada anteriormente, utilizando o comando:
 
 ```shell
-docker run tractian-rag
+docker run -p 8000:8000 -p 8501:8501 \
+       --name genai-trac \
+       genai-trac-app
 ```
 
 
@@ -39,7 +40,7 @@ Contendo as rotas:
 - /reset_index: reinicializar indexação de vector store;
 
 
-### API Contract
+## API Contract
 
 This document outlines the contract for the LLM API, which allows for document processing and question answering based on the indexed documents.
 
@@ -136,12 +137,50 @@ Body:
 
 - answer (string): The answer to the question, derived from the indexed documents. If the information is not found or an error occurs, the message should indicate this.
 
+#### 3. Index re-setting
+
+This endpoint is used to reset the local vector index.
+
+- URL: /reset_index
+
+- Method: POST
+
+#### Request
+
+Headers:
+
+    Content-Type: application/json
+
+#### Example cURL Request:
+
+    curl -X POST \
+    http://localhost:8000/reset_index \
+    -H 'Content-Type: application/json' \
+
+#### Response (Success: 200 OK)
+
+Headers:
+
+    Content-Type: application/json
+
+Body:
+
+    {
+        "message": "Vector store and persisted index have been reset successfully."
+    }
+- answer (string): string with the message "Vector store and persisted index have been reset successfully."
+
+### Postman Collection:
+
+A collection do postman pode ser acessado no arquivo JSON `Tractian GenAI.postman_collection.json`, presenten na raiz do projeto.
 
 ### UI interface App:
 
-Caso o usuário queira acessar o processador inteligente de documentos de uma maneira mais intuitiva, segere-se utilizar a interface gráfica steamlit pelo endereço: ```http://localhost:8501```.
+Caso o usuário queira acessar o Q&A AI assistant de uma maneira mais intuitiva, segere-se utilizar a interface gráfica steamlit pelo endereço: ```http://localhost:8501```.
 
 Neste caso, será mostrada a seguinte tela:
+
+![alt text](images/front_print.png)
 
 ## 🤝 Agradecimentos
 
